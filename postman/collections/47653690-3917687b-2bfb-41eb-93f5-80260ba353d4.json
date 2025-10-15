@@ -935,7 +935,8 @@
 									"value": "string"
 								}
 							]
-						}
+						},
+						"description": "Retrieves a list of feedback entries. Supports filtering by date, rating, and property_id. Returns an array of feedback objects. Parameters: date (optional, string, filter by date), rating (optional, integer, filter by rating), property_id (optional, string, filter by property). Response: 200 OK with feedback list, 400 for invalid params, 401 unauthorized."
 					},
 					"response": [
 						{
