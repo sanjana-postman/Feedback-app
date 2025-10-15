@@ -1,0 +1,1216 @@
+{
+	"info": {
+		"_postman_id": "47653690-3917687b-2bfb-41eb-93f5-80260ba353d4",
+		"name": "Feedback API",
+		"description": "RESTful API for collecting, managing, analyzing, and responding to customer feedback. Enables businesses to improve service quality and operational decision-making.\n",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "feedback",
+			"item": [
+				{
+					"name": "{id}",
+					"item": [
+						{
+							"name": "response",
+							"item": [
+								{
+									"name": "Post a management response to feedback",
+									"id": "47653690-d43efa33-3f9f-4b29-8fc0-e9b869c1c426",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"responder_name\": \"Manager Mike\",\n  \"response_message\": \"Thank you for your feedback! We will address your concerns.\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/feedback/:id/response",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"feedback",
+												":id",
+												"response"
+											],
+											"variable": [
+												{
+													"id": "6ea68962-7a2d-4a82-9ce7-818603bfee75",
+													"key": "id",
+													"value": "895180e2-ab93-c02a-587c-2daae35d49b6"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"id": "47653690-af528647-f160-43d4-80d0-7341e6cd955e",
+											"name": "Response posted",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"responder_name\": \"Manager Mike\",\n  \"response_message\": \"Thank you for your feedback! We will address your concerns.\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/feedback/:id/response",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"feedback",
+														":id",
+														"response"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Created",
+											"code": 201,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n  \"response_id\": \"r1b2c3d4-e5f6-7890-abcd-1234567890ef\",\n  \"feedback_id\": \"b1a2c3d4-e5f6-7890-abcd-1234567890ef\",\n  \"responder_name\": \"Manager Mike\",\n  \"response_message\": \"Thank you for your feedback! We will address your concerns.\",\n  \"created_at\": \"2024-06-03T10:00:00Z\"\n}"
+										},
+										{
+											"id": "47653690-00f48a6e-dea5-40f5-b647-b33ed58f16b0",
+											"name": "Invalid input",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"responder_name\": \"Manager Mike\",\n  \"response_message\": \"Thank you for your feedback! We will address your concerns.\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/feedback/:id/response",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"feedback",
+														":id",
+														"response"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n  \"code\": 400,\n  \"message\": \"Missing response message\"\n}"
+										},
+										{
+											"id": "47653690-c06eb278-e31a-4cf6-b8f3-c2a065b74b47",
+											"name": "Feedback not found",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"responder_name\": \"Manager Mike\",\n  \"response_message\": \"Thank you for your feedback! We will address your concerns.\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/feedback/:id/response",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"feedback",
+														":id",
+														"response"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n  \"code\": 404,\n  \"message\": \"Feedback not found\"\n}"
+										},
+										{
+											"id": "47653690-29f64a34-b209-43fe-aa10-1e06eea78adc",
+											"name": "Server error",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"responder_name\": \"Manager Mike\",\n  \"response_message\": \"Thank you for your feedback! We will address your concerns.\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/feedback/:id/response",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"feedback",
+														":id",
+														"response"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n  \"code\": 500,\n  \"message\": \"Internal server error\"\n}"
+										}
+									]
+								}
+							],
+							"id": "47653690-b585988f-94da-47c1-92df-b26d84490977"
+						},
+						{
+							"name": "Retrieve a specific feedback entry",
+							"id": "47653690-808bdead-5dc5-4714-a22c-55a7c17c5cc2",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/feedback/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"feedback",
+										":id"
+									],
+									"variable": [
+										{
+											"id": "5e0052b6-1ed8-446a-9dc0-b08212b20480",
+											"key": "id",
+											"value": "895180e2-ab93-c02a-587c-2daae35d49b6"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"id": "47653690-1043fdda-db57-47e3-8c20-85914fe9707d",
+									"name": "Feedback entry found",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/feedback/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"feedback",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n  \"feedback_id\": \"b1a2c3d4-e5f6-7890-abcd-1234567890ef\",\n  \"customer_name\": \"Jane Doe\",\n  \"customer_email\": \"jane@example.com\",\n  \"property_id\": \"PROP123\",\n  \"rating\": 5,\n  \"category\": \"cleanliness\",\n  \"comments\": \"Room was spotless and staff were friendly.\",\n  \"sentiment_score\": 0.95,\n  \"status\": \"new\",\n  \"created_at\": \"2024-06-01T12:00:00Z\",\n  \"updated_at\": \"2024-06-01T12:00:00Z\"\n}"
+								},
+								{
+									"id": "47653690-5ece9bcb-d5c0-4050-bf28-f0b183b8ebf9",
+									"name": "Feedback not found",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/feedback/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"feedback",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n  \"code\": 404,\n  \"message\": \"Feedback not found\"\n}"
+								},
+								{
+									"id": "47653690-32879990-e672-4a0d-9ddc-dd1d65fcb2e5",
+									"name": "Server error",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/feedback/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"feedback",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n  \"code\": 500,\n  \"message\": \"Internal server error\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Update or categorize feedback",
+							"id": "47653690-c02546d5-faa0-4cee-b122-863eef328b96",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"status\": \"resolved\",\n  \"category\": \"staff behavior\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/feedback/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"feedback",
+										":id"
+									],
+									"variable": [
+										{
+											"id": "16a03e44-462a-4168-a259-f694d8dc5d46",
+											"key": "id",
+											"value": "895180e2-ab93-c02a-587c-2daae35d49b6"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"id": "47653690-4b3bf396-1935-47da-bfa3-612e1de3eb8c",
+									"name": "Feedback updated",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"status\": \"resolved\",\n  \"category\": \"staff behavior\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/feedback/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"feedback",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n  \"feedback_id\": \"b1a2c3d4-e5f6-7890-abcd-1234567890ef\",\n  \"customer_name\": \"Jane Doe\",\n  \"customer_email\": \"jane@example.com\",\n  \"property_id\": \"PROP123\",\n  \"rating\": 5,\n  \"category\": \"staff behavior\",\n  \"comments\": \"Room was spotless and staff were friendly.\",\n  \"sentiment_score\": 0.95,\n  \"status\": \"resolved\",\n  \"created_at\": \"2024-06-01T12:00:00Z\",\n  \"updated_at\": \"2024-06-03T09:00:00Z\"\n}"
+								},
+								{
+									"id": "47653690-a13862a8-0fd8-4f85-b037-634a2d6af0dc",
+									"name": "Invalid update",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"status\": \"resolved\",\n  \"category\": \"staff behavior\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/feedback/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"feedback",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n  \"code\": 400,\n  \"message\": \"Invalid status value\"\n}"
+								},
+								{
+									"id": "47653690-556582cd-da50-40f8-8692-20e9d6420f3b",
+									"name": "Feedback not found",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"status\": \"resolved\",\n  \"category\": \"staff behavior\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/feedback/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"feedback",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n  \"code\": 404,\n  \"message\": \"Feedback not found\"\n}"
+								},
+								{
+									"id": "47653690-53b8f306-463a-452f-9ecb-129fd9166e67",
+									"name": "Server error",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"status\": \"resolved\",\n  \"category\": \"staff behavior\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/feedback/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"feedback",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n  \"code\": 500,\n  \"message\": \"Internal server error\"\n}"
+								}
+							]
+						}
+					],
+					"id": "47653690-421eead5-8944-49e4-ae6a-2d0ca902bb1d"
+				},
+				{
+					"name": "Submit new customer feedback",
+					"id": "47653690-a59dfb17-840c-41de-89e2-512223716b6c",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"customer_name\": \"Jane Doe\",\n  \"customer_email\": \"jane@example.com\",\n  \"property_id\": \"PROP123\",\n  \"rating\": 5,\n  \"category\": \"cleanliness\",\n  \"comments\": \"Room was spotless and staff were friendly.\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/feedback",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"feedback"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "47653690-ffcabd51-804a-4e1c-8dca-3c4476fe0278",
+							"name": "Feedback created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"customer_name\": \"Jane Doe\",\n  \"customer_email\": \"jane@example.com\",\n  \"property_id\": \"PROP123\",\n  \"rating\": 5,\n  \"category\": \"cleanliness\",\n  \"comments\": \"Room was spotless and staff were friendly.\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/feedback",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"feedback"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n  \"feedback_id\": \"b1a2c3d4-e5f6-7890-abcd-1234567890ef\",\n  \"customer_name\": \"Jane Doe\",\n  \"customer_email\": \"jane@example.com\",\n  \"property_id\": \"PROP123\",\n  \"rating\": 5,\n  \"category\": \"cleanliness\",\n  \"comments\": \"Room was spotless and staff were friendly.\",\n  \"sentiment_score\": 0.95,\n  \"status\": \"new\",\n  \"created_at\": \"2024-06-01T12:00:00Z\",\n  \"updated_at\": \"2024-06-01T12:00:00Z\"\n}"
+						},
+						{
+							"id": "47653690-6995e86d-6827-402d-8478-6745f9f2ced4",
+							"name": "Invalid input",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"customer_name\": \"Jane Doe\",\n  \"customer_email\": \"jane@example.com\",\n  \"property_id\": \"PROP123\",\n  \"rating\": 5,\n  \"category\": \"cleanliness\",\n  \"comments\": \"Room was spotless and staff were friendly.\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/feedback",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"feedback"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n  \"code\": 400,\n  \"message\": \"Missing required field: rating\"\n}"
+						},
+						{
+							"id": "47653690-86fa8329-a207-46d4-aa4b-d201bd0960ff",
+							"name": "Server error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"customer_name\": \"Jane Doe\",\n  \"customer_email\": \"jane@example.com\",\n  \"property_id\": \"PROP123\",\n  \"rating\": 5,\n  \"category\": \"cleanliness\",\n  \"comments\": \"Room was spotless and staff were friendly.\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/feedback",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"feedback"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n  \"code\": 500,\n  \"message\": \"Internal server error\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Retrieve list of feedback entries",
+					"id": "47653690-679729ac-5f32-42fb-9668-1f306f2c5705",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/feedback?date=1955-12-07&rating=3832&property_id=string",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"feedback"
+							],
+							"query": [
+								{
+									"description": "Filter by date",
+									"key": "date",
+									"value": "1955-12-07"
+								},
+								{
+									"description": "Filter by rating",
+									"key": "rating",
+									"value": "3832"
+								},
+								{
+									"description": "Filter by property",
+									"key": "property_id",
+									"value": "string"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "47653690-67f13345-6096-4b83-85fa-9b003ccc8e5f",
+							"name": "List of feedback entries",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/feedback?date=1955-12-07&rating=3832&property_id=string",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"feedback"
+									],
+									"query": [
+										{
+											"description": "Filter by date",
+											"key": "date",
+											"value": "1955-12-07"
+										},
+										{
+											"description": "Filter by rating",
+											"key": "rating",
+											"value": "3832"
+										},
+										{
+											"description": "Filter by property",
+											"key": "property_id",
+											"value": "string"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "[\n  {\n    \"feedback_id\": \"b1a2c3d4-e5f6-7890-abcd-1234567890ef\",\n    \"customer_name\": \"Jane Doe\",\n    \"customer_email\": \"jane@example.com\",\n    \"property_id\": \"PROP123\",\n    \"rating\": 5,\n    \"category\": \"cleanliness\",\n    \"comments\": \"Room was spotless and staff were friendly.\",\n    \"sentiment_score\": 0.95,\n    \"status\": \"new\",\n    \"created_at\": \"2024-06-01T12:00:00Z\",\n    \"updated_at\": \"2024-06-01T12:00:00Z\"\n  },\n  {\n    \"feedback_id\": \"c2b3d4e5-f6a7-8901-bcda-2345678901fa\",\n    \"customer_name\": \"John Smith\",\n    \"customer_email\": \"john@example.com\",\n    \"property_id\": \"PROP456\",\n    \"rating\": 3,\n    \"category\": \"food quality\",\n    \"comments\": \"Food was average, but service was quick.\",\n    \"sentiment_score\": 0.2,\n    \"status\": \"in review\",\n    \"created_at\": \"2024-06-02T15:30:00Z\",\n    \"updated_at\": \"2024-06-02T15:30:00Z\"\n  }\n]"
+						},
+						{
+							"id": "47653690-652379c9-e0d6-446c-ae38-3b910c1cd016",
+							"name": "Invalid query",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/feedback?date=1955-12-07&rating=3832&property_id=string",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"feedback"
+									],
+									"query": [
+										{
+											"description": "Filter by date",
+											"key": "date",
+											"value": "1955-12-07"
+										},
+										{
+											"description": "Filter by rating",
+											"key": "rating",
+											"value": "3832"
+										},
+										{
+											"description": "Filter by property",
+											"key": "property_id",
+											"value": "string"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n  \"code\": 400,\n  \"message\": \"Invalid date format\"\n}"
+						},
+						{
+							"id": "47653690-beeb951e-3be9-4dbd-9dac-f4293d6c6971",
+							"name": "Server error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/feedback?date=1955-12-07&rating=3832&property_id=string",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"feedback"
+									],
+									"query": [
+										{
+											"description": "Filter by date",
+											"key": "date",
+											"value": "1955-12-07"
+										},
+										{
+											"description": "Filter by rating",
+											"key": "rating",
+											"value": "3832"
+										},
+										{
+											"description": "Filter by property",
+											"key": "property_id",
+											"value": "string"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n  \"code\": 500,\n  \"message\": \"Internal server error\"\n}"
+						}
+					]
+				}
+			],
+			"id": "47653690-6e3a2ab9-fff8-4753-85d9-fd8af73ead23"
+		},
+		{
+			"name": "analytics",
+			"item": [
+				{
+					"name": "summary",
+					"item": [
+						{
+							"name": "Generate summary statistics",
+							"id": "47653690-d3a0cc2c-1b64-4ddb-82cc-3da195e0e174",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/analytics/summary",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"analytics",
+										"summary"
+									]
+								}
+							},
+							"response": [
+								{
+									"id": "47653690-d8ca75bd-271e-4b76-bc41-61308ad76d18",
+									"name": "Summary statistics",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/analytics/summary",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"analytics",
+												"summary"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n  \"average_rating\": 4.2,\n  \"total_feedback\": 120,\n  \"top_issues\": [\n    \"cleanliness\",\n    \"food quality\",\n    \"staff behavior\"\n  ],\n  \"sentiment_distribution\": {\n    \"positive\": 80,\n    \"neutral\": 25,\n    \"negative\": 15\n  }\n}"
+								},
+								{
+									"id": "47653690-3b14cf71-f162-44a2-9d59-a60114f3866c",
+									"name": "Server error",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/analytics/summary",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"analytics",
+												"summary"
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"responseTime": null,
+									"body": "{\n  \"code\": 500,\n  \"message\": \"Internal server error\"\n}"
+								}
+							]
+						}
+					],
+					"id": "47653690-a50ac655-5ba0-4087-8951-7ad5c39fda1c"
+				}
+			],
+			"id": "47653690-035699ee-ec55-4b97-a805-826f81798dde"
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://api.example.com"
+		}
+	]
+}
