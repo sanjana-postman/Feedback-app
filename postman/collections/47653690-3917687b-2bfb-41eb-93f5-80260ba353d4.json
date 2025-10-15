@@ -60,7 +60,8 @@
 													"value": "895180e2-ab93-c02a-587c-2daae35d49b6"
 												}
 											]
-										}
+										},
+										"description": "Posts a management response to a feedback entry. Path parameter: id (string, required). Body: response details (JSON). Response: 201 Created with response object, 400 for invalid input, 404 if feedback not found, 401 unauthorized."
 									},
 									"response": [
 										{
@@ -318,7 +319,8 @@
 											"value": "895180e2-ab93-c02a-587c-2daae35d49b6"
 										}
 									]
-								}
+								},
+								"description": "Retrieves a specific feedback entry by ID. Path parameter: id (string, required). Response: 200 OK with feedback object, 404 if not found, 401 unauthorized."
 							},
 							"response": [
 								{
@@ -487,7 +489,8 @@
 											"value": "895180e2-ab93-c02a-587c-2daae35d49b6"
 										}
 									]
-								}
+								},
+								"description": "Updates or categorizes an existing feedback entry. Path parameter: id (string, required). Body: fields to update (JSON). Response: 200 OK with updated feedback, 400 for invalid input, 404 if not found, 401 unauthorized."
 							},
 							"response": [
 								{
@@ -747,7 +750,8 @@
 							"path": [
 								"feedback"
 							]
-						}
+						},
+						"description": "Submits new customer feedback. Body: feedback details (JSON). Response: 201 Created with feedback object, 400 for invalid input, 401 unauthorized."
 					},
 					"response": [
 						{
@@ -1126,7 +1130,8 @@
 										"analytics",
 										"summary"
 									]
-								}
+								},
+								"description": "Generates summary statistics for feedback. No parameters. Response: 200 OK with analytics summary, 401 unauthorized."
 							},
 							"response": [
 								{
