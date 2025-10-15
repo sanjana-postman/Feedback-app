@@ -291,6 +291,21 @@
 						},
 						{
 							"name": "Retrieve a specific feedback entry",
+							"event": [
+								{
+									"id": "0e4cccd9-adf1-402a-9ed6-54e636bbcd64",
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+											"pm.test('Returns feedback object', function () { var json = pm.response.json(); pm.expect(json).to.be.an('object'); });",
+											"pm.test('Handles not found', function () { pm.sendRequest({url: pm.variables.replaceIn('GET {{baseUrl}}/feedback/invalid-id'), method: 'GET'}, function (err, res) { pm.expect(res.code).to.eql(404); }); });",
+											"pm.test('Unauthorized access', function () { pm.sendRequest({url: pm.variables.replaceIn('GET {{baseUrl}}/feedback/123'), header: {Authorization: 'Bearer invalid'}, method: 'GET'}, function (err, res) { pm.expect(res.code).to.eql(401); }); });"
+										]
+									}
+								}
+							],
 							"id": "47653690-808bdead-5dc5-4714-a22c-55a7c17c5cc2",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
@@ -447,6 +462,21 @@
 						},
 						{
 							"name": "Update or categorize feedback",
+							"event": [
+								{
+									"id": "6892a59c-d859-4e16-a802-5d19540f4ea3",
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+											"pm.test('Returns updated feedback', function () { var json = pm.response.json(); pm.expect(json).to.be.an('object'); });",
+											"pm.test('Handles invalid input', function () { pm.sendRequest({url: pm.variables.replaceIn('PATCH {{baseUrl}}/feedback/invalid-id'), method: 'PATCH', body: {mode: 'raw', raw: '{}'}, header: {'Content-Type': 'application/json'}}, function (err, res) { pm.expect(res.code).to.be.oneOf([400, 404, 422]); }); });",
+											"pm.test('Unauthorized access', function () { pm.sendRequest({url: pm.variables.replaceIn('PATCH {{baseUrl}}/feedback/123'), method: 'PATCH', header: {Authorization: 'Bearer invalid'}, body: {mode: 'raw', raw: '{\"category\":\"test\"}'}, header: {'Content-Type': 'application/json'}}, function (err, res) { pm.expect(res.code).to.eql(401); }); });"
+										]
+									}
+								}
+							],
 							"id": "47653690-c02546d5-faa0-4cee-b122-863eef328b96",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
@@ -716,6 +746,21 @@
 				},
 				{
 					"name": "Submit new customer feedback",
+					"event": [
+						{
+							"id": "973a9699-8ede-4e2a-a18e-9ea3a85d1c8a",
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test('Status code is 201', function () { pm.response.to.have.status(201); });",
+									"pm.test('Returns feedback object', function () { var json = pm.response.json(); pm.expect(json).to.be.an('object'); });",
+									"pm.test('Handles invalid input', function () { pm.sendRequest({url: pm.variables.replaceIn('POST {{baseUrl}}/feedback'), method: 'POST', body: {mode: 'raw', raw: '{}'}, header: {'Content-Type': 'application/json'}}, function (err, res) { pm.expect(res.code).to.be.oneOf([400, 422]); }); });",
+									"pm.test('Unauthorized access', function () { pm.sendRequest({url: pm.variables.replaceIn('POST {{baseUrl}}/feedback'), method: 'POST', header: {Authorization: 'Bearer invalid'}, body: {mode: 'raw', raw: '{\"message\":\"test\"}'}, header: {'Content-Type': 'application/json'}}, function (err, res) { pm.expect(res.code).to.eql(401); }); });"
+								]
+							}
+						}
+					],
 					"id": "47653690-a59dfb17-840c-41de-89e2-512223716b6c",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -902,6 +947,21 @@
 				},
 				{
 					"name": "Retrieve list of feedback entries",
+					"event": [
+						{
+							"id": "41d3fea2-f665-4949-88a8-98b03ff169bf",
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+									"pm.test('Returns array', function () { var json = pm.response.json(); pm.expect(Array.isArray(json)).to.be.true; });",
+									"pm.test('Handles invalid params', function () { pm.sendRequest({url: pm.variables.replaceIn('GET {{baseUrl}}/feedback?date=invalid-date'), method: 'GET'}, function (err, res) { pm.expect(res.code).to.be.oneOf([400, 422]); }); });",
+									"pm.test('Unauthorized access', function () { pm.sendRequest({url: pm.variables.replaceIn('GET {{baseUrl}}/feedback'), header: {Authorization: 'Bearer invalid'}, method: 'GET'}, function (err, res) { pm.expect(res.code).to.eql(401); }); });"
+								]
+							}
+						}
+					],
 					"id": "47653690-679729ac-5f32-42fb-9668-1f306f2c5705",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -1109,6 +1169,20 @@
 					"item": [
 						{
 							"name": "Generate summary statistics",
+							"event": [
+								{
+									"id": "7873af86-e131-43d7-bc95-7e247bf28b1f",
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+											"pm.test('Returns analytics summary', function () { var json = pm.response.json(); pm.expect(json).to.be.an('object'); });",
+											"pm.test('Unauthorized access', function () { pm.sendRequest({url: pm.variables.replaceIn('GET {{baseUrl}}/analytics/summary'), header: {Authorization: 'Bearer invalid'}, method: 'GET'}, function (err, res) { pm.expect(res.code).to.eql(401); }); });"
+										]
+									}
+								}
+							],
 							"id": "47653690-d3a0cc2c-1b64-4ddb-82cc-3da195e0e174",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
