@@ -17,6 +17,21 @@
 							"item": [
 								{
 									"name": "Post a management response to feedback",
+									"event": [
+										{
+											"id": "9841a3b5-1ee5-4a91-897b-d7c6db406fc0",
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													"pm.test('Status code is 201', function () { pm.response.to.have.status(201); });",
+													"pm.test('Returns response object', function () { var json = pm.response.json(); pm.expect(json).to.be.an('object'); });",
+													"pm.test('Handles invalid input', function () { pm.sendRequest({url: pm.variables.replaceIn('POST {{baseUrl}}/feedback/invalid-id/response'), method: 'POST', body: {mode: 'raw', raw: '{}'}, header: {'Content-Type': 'application/json'}}, function (err, res) { pm.expect(res.code).to.be.oneOf([400, 404, 422]); }); });",
+													"pm.test('Unauthorized access', function () { pm.sendRequest({url: pm.variables.replaceIn('POST {{baseUrl}}/feedback/123/response'), method: 'POST', header: {Authorization: 'Bearer invalid'}, body: {mode: 'raw', raw: '{\"message\":\"test\"}'}, header: {'Content-Type': 'application/json'}}, function (err, res) { pm.expect(res.code).to.eql(401); }); });"
+												]
+											}
+										}
+									],
 									"id": "47653690-d43efa33-3f9f-4b29-8fc0-e9b869c1c426",
 									"protocolProfileBehavior": {
 										"disableBodyPruning": true
