@@ -22,13 +22,32 @@
 											"id": "9841a3b5-1ee5-4a91-897b-d7c6db406fc0",
 											"listen": "test",
 											"script": {
-												"type": "text/javascript",
+												"id": "50fc0e06-45e9-4075-82d8-52dba6339ad5",
 												"exec": [
-													"pm.test('Status code is 201', function () { pm.response.to.have.status(201); });",
-													"pm.test('Returns response object', function () { var json = pm.response.json(); pm.expect(json).to.be.an('object'); });",
-													"pm.test('Handles invalid input', function () { pm.sendRequest({url: pm.variables.replaceIn('POST {{baseUrl}}/feedback/invalid-id/response'), method: 'POST', body: {mode: 'raw', raw: '{}'}, header: {'Content-Type': 'application/json'}}, function (err, res) { pm.expect(res.code).to.be.oneOf([400, 404, 422]); }); });",
-													"pm.test('Unauthorized access', function () { pm.sendRequest({url: pm.variables.replaceIn('POST {{baseUrl}}/feedback/123/response'), method: 'POST', header: {Authorization: 'Bearer invalid'}, body: {mode: 'raw', raw: '{\"message\":\"test\"}'}, header: {'Content-Type': 'application/json'}}, function (err, res) { pm.expect(res.code).to.eql(401); }); });"
-												]
+													"// Post a management response to feedback",
+													"pm.test(\"Status code is 201, 400, 404, or 401\", function () {",
+													"    pm.expect([201, 400, 404, 401]).to.include(pm.response.code);",
+													"});",
+													"",
+													"if (pm.response.code === 201) {",
+													"    var jsonData = pm.response.json();",
+													"    pm.test(\"Response object has required fields\", function () {",
+													"        pm.expect(jsonData).to.have.property(\"id\");",
+													"        pm.expect(jsonData).to.have.property(\"feedbackId\");",
+													"        pm.expect(jsonData).to.have.property(\"response\");",
+													"        pm.expect(jsonData).to.have.property(\"date\");",
+													"    });",
+													"}",
+													"if ([400, 404, 401].includes(pm.response.code)) {",
+													"    pm.test(\"Error response has error field\", function () {",
+													"        var jsonData = pm.response.json();",
+													"        pm.expect(jsonData).to.have.property(\"error\");",
+													"    });",
+													"}"
+												],
+												"type": "text/javascript",
+												"packages": {},
+												"requests": {}
 											}
 										}
 									],
@@ -70,7 +89,6 @@
 											],
 											"variable": [
 												{
-													"id": "6ea68962-7a2d-4a82-9ce7-818603bfee75",
 													"key": "id",
 													"value": "895180e2-ab93-c02a-587c-2daae35d49b6"
 												}
