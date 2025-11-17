@@ -22,6 +22,7 @@
 											"id": "9841a3b5-1ee5-4a91-897b-d7c6db406fc0",
 											"listen": "test",
 											"script": {
+												"id": "ae72e38f-b61d-4f98-9b5d-8f1dcdb526ec",
 												"type": "text/javascript",
 												"exec": [
 													"pm.test('Status code is 201', function () { pm.response.to.have.status(201); });",
@@ -70,13 +71,11 @@
 											],
 											"variable": [
 												{
-													"id": "6ea68962-7a2d-4a82-9ce7-818603bfee75",
 													"key": "id",
 													"value": "895180e2-ab93-c02a-587c-2daae35d49b6"
 												}
 											]
-										},
-										"description": "Posts a management response to a feedback entry. Path parameter: id (string, required). Body: response details (JSON). Response: 201 Created with response object, 400 for invalid input, 404 if feedback not found, 401 unauthorized."
+										}
 									},
 									"response": [
 										{
@@ -311,6 +310,7 @@
 									"id": "0e4cccd9-adf1-402a-9ed6-54e636bbcd64",
 									"listen": "test",
 									"script": {
+										"id": "847d675f-aa0a-4747-8d77-2b0a5cbc97ce",
 										"type": "text/javascript",
 										"exec": [
 											"pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
@@ -344,13 +344,11 @@
 									],
 									"variable": [
 										{
-											"id": "5e0052b6-1ed8-446a-9dc0-b08212b20480",
 											"key": "id",
 											"value": "895180e2-ab93-c02a-587c-2daae35d49b6"
 										}
 									]
-								},
-								"description": "Retrieves a specific feedback entry by ID. Path parameter: id (string, required). Response: 200 OK with feedback object, 404 if not found, 401 unauthorized."
+								}
 							},
 							"response": [
 								{
@@ -482,6 +480,7 @@
 									"id": "6892a59c-d859-4e16-a802-5d19540f4ea3",
 									"listen": "test",
 									"script": {
+										"id": "9674c791-c2d0-499a-94e8-bf5b34d1deb8",
 										"type": "text/javascript",
 										"exec": [
 											"pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
@@ -529,13 +528,11 @@
 									],
 									"variable": [
 										{
-											"id": "16a03e44-462a-4168-a259-f694d8dc5d46",
 											"key": "id",
 											"value": "895180e2-ab93-c02a-587c-2daae35d49b6"
 										}
 									]
-								},
-								"description": "Updates or categorizes an existing feedback entry. Path parameter: id (string, required). Body: fields to update (JSON). Response: 200 OK with updated feedback, 400 for invalid input, 404 if not found, 401 unauthorized."
+								}
 							},
 							"response": [
 								{
@@ -766,6 +763,7 @@
 							"id": "973a9699-8ede-4e2a-a18e-9ea3a85d1c8a",
 							"listen": "test",
 							"script": {
+								"id": "423b0db0-ddab-427b-9a07-a5fe258381de",
 								"type": "text/javascript",
 								"exec": [
 									"pm.test('Status code is 201', function () { pm.response.to.have.status(201); });",
@@ -794,7 +792,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"customer_name\": \"Jane Doe\",\n  \"customer_email\": \"jane@example.com\",\n  \"property_id\": \"PROP123\",\n  \"rating\": 5,\n  \"category\": \"cleanliness\",\n  \"comments\": \"Room was spotless and staff were friendly.\"\n}",
+							"raw": "{\n  \"customer_name\": \"Jane Doe\",\n  \"phone\": 12456,\n  \"customer_email\": \"jane@example.com\",\n  \"property_id\": \"PROP123\",\n  \"rating\": 5,\n  \"category\": \"cleanliness\",\n  \"comments\": \"Room was spotless and staff were friendly.\"\n}",
 							"options": {
 								"raw": {
 									"headerFamily": "json",
@@ -810,8 +808,7 @@
 							"path": [
 								"feedback"
 							]
-						},
-						"description": "Submits new customer feedback. Body: feedback details (JSON). Response: 201 Created with feedback object, 400 for invalid input, 401 unauthorized."
+						}
 					},
 					"response": [
 						{
@@ -831,7 +828,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"customer_name\": \"Jane Doe\",\n  \"customer_email\": \"jane@example.com\",\n  \"property_id\": \"PROP123\",\n  \"rating\": 5,\n  \"category\": \"cleanliness\",\n  \"comments\": \"Room was spotless and staff were friendly.\"\n}",
+									"raw": "{\n  \"customer_name\": \"Jane Doe\",\n  \"phone\": 12456,\n  \"customer_email\": \"jane@example.com\",\n  \"property_id\": \"PROP123\",\n  \"rating\": 5,\n  \"category\": \"cleanliness\",\n  \"comments\": \"Room was spotless and staff were friendly.\"\n}",
 									"options": {
 										"raw": {
 											"headerFamily": "json",
@@ -879,7 +876,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"customer_name\": \"Jane Doe\",\n  \"customer_email\": \"jane@example.com\",\n  \"property_id\": \"PROP123\",\n  \"rating\": 5,\n  \"category\": \"cleanliness\",\n  \"comments\": \"Room was spotless and staff were friendly.\"\n}",
+									"raw": "{\n  \"customer_name\": \"Jane Doe\",\n  \"phone\": 12456,\n  \"customer_email\": \"jane@example.com\",\n  \"property_id\": \"PROP123\",\n  \"rating\": 5,\n  \"category\": \"cleanliness\",\n  \"comments\": \"Room was spotless and staff were friendly.\"\n}",
 									"options": {
 										"raw": {
 											"headerFamily": "json",
@@ -927,7 +924,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"customer_name\": \"Jane Doe\",\n  \"customer_email\": \"jane@example.com\",\n  \"property_id\": \"PROP123\",\n  \"rating\": 5,\n  \"category\": \"cleanliness\",\n  \"comments\": \"Room was spotless and staff were friendly.\"\n}",
+									"raw": "{\n  \"customer_name\": \"Jane Doe\",\n  \"phone\": 12456,\n  \"customer_email\": \"jane@example.com\",\n  \"property_id\": \"PROP123\",\n  \"rating\": 5,\n  \"category\": \"cleanliness\",\n  \"comments\": \"Room was spotless and staff were friendly.\"\n}",
 									"options": {
 										"raw": {
 											"headerFamily": "json",
@@ -967,6 +964,7 @@
 							"id": "41d3fea2-f665-4949-88a8-98b03ff169bf",
 							"listen": "test",
 							"script": {
+								"id": "9c5b6d3a-eedb-4821-b713-cd5172fa738c",
 								"type": "text/javascript",
 								"exec": [
 									"pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
@@ -1014,8 +1012,7 @@
 									"value": "string"
 								}
 							]
-						},
-						"description": "Retrieves a list of feedback entries. Supports filtering by date, rating, and property_id. Returns an array of feedback objects. Parameters: date (optional, string, filter by date), rating (optional, integer, filter by rating), property_id (optional, string, filter by property). Response: 200 OK with feedback list, 400 for invalid params, 401 unauthorized."
+						}
 					},
 					"response": [
 						{
@@ -1189,6 +1186,7 @@
 									"id": "7873af86-e131-43d7-bc95-7e247bf28b1f",
 									"listen": "test",
 									"script": {
+										"id": "746eb9cc-8657-4de3-b499-78659cc9eb2d",
 										"type": "text/javascript",
 										"exec": [
 											"pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
@@ -1219,8 +1217,7 @@
 										"analytics",
 										"summary"
 									]
-								},
-								"description": "Generates summary statistics for feedback. No parameters. Response: 200 OK with analytics summary, 401 unauthorized."
+								}
 							},
 							"response": [
 								{
@@ -1305,7 +1302,8 @@
 	"variable": [
 		{
 			"key": "baseUrl",
-			"value": "https://api.example.com"
+			"value": "https://api.example.com",
+			"type": "any"
 		}
 	]
 }
