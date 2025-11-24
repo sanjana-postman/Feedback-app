@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "47653690-3917687b-2bfb-41eb-93f5-80260ba353d4",
 		"name": "Feedback API",
-		"description": "RESTful API for collecting, managing, analyzing, and responding to customer feedback. Enables businesses to improve service quality and operational decision-making.\n",
+		"description": "RESTful API for collecting, managing, analyzing, and responding to customer feedback. Enables businesses to improve service quality and operational decision-making.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
