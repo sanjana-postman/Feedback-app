@@ -1,1 +1,494 @@
+openapi: 3.0.1
+info:
+  title: Customer Feedback API
+  version: 1.0.0
+  description: |
+    RESTful API for collecting, managing, analyzing, and responding to customer feedback. Enables businesses to improve service quality and operational decision-making.
+servers:
+  - url: https://api.example.com
+paths:
+  /feedback:
+    post:
+      summary: Submit new customer feedback
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FeedbackSubmission'
+            examples:
+              valid:
+                summary: Valid feedback submission
+                value:
+                  customer_name: "Jane Doe"
+                  phone: 12456
+                  customer_email: "jane@example.com"
+                  property_id: "PROP123"
+                  rating: 5
+                  category: "cleanliness"
+                  comments: "Room was spotless and staff were friendly."
+      responses:
+        '201':
+          description: Feedback created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Feedback'
+              examples:
+                success:
+                  value:
+                    feedback_id: "b1a2c3d4-e5f6-7890-abcd-1234567890ef"
+                    customer_name: "Jane Doe"
+                    customer_email: "jane@example.com"
+                    property_id: "PROP123"
+                    rating: 5
+                    category: "cleanliness"
+                    comments: "Room was spotless and staff were friendly."
+                    sentiment_score: 0.95
+                    status: "new"
+                    created_at: "2024-06-01T12:00:00Z"
+                    updated_at: "2024-06-01T12:00:00Z"
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                invalid:
+                  value:
+                    code: 400
+                    message: "Missing required field: rating"
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                error:
+                  value:
+                    code: 500
+                    message: "Internal server error"
+    get:
+      summary: Retrieve list of feedback entries
+      parameters:
+        - in: query
+          name: date
+          schema:
+            type: string
+            format: date
+          description: Filter by date
+        - in: query
+          name: rating
+          schema:
+            type: integer
+          description: Filter by rating
+        - in: query
+          name: property_id
+          schema:
+            type: string
+          description: Filter by property
+      responses:
+        '200':
+          description: List of feedback entries
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Feedback'
+              examples:
+                success:
+                  value:
+                    - feedback_id: "b1a2c3d4-e5f6-7890-abcd-1234567890ef"
+                      customer_name: "Jane Doe"
+                      customer_email: "jane@example.com"
+                      property_id: "PROP123"
+                      rating: 5
+                      category: "cleanliness"
+                      comments: "Room was spotless and staff were friendly."
+                      sentiment_score: 0.95
+                      status: "new"
+                      created_at: "2024-06-01T12:00:00Z"
+                      updated_at: "2024-06-01T12:00:00Z"
+                    - feedback_id: "c2b3d4e5-f6a7-8901-bcda-2345678901fa"
+                      customer_name: "John Smith"
+                      customer_email: "john@example.com"
+                      property_id: "PROP456"
+                      rating: 3
+                      category: "food quality"
+                      comments: "Food was average, but service was quick."
+                      sentiment_score: 0.2
+                      status: "in review"
+                      created_at: "2024-06-02T15:30:00Z"
+                      updated_at: "2024-06-02T15:30:00Z"
+        '400':
+          description: Invalid query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                invalid:
+                  value:
+                    code: 400
+                    message: "Invalid date format"
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                error:
+                  value:
+                    code: 500
+                    message: "Internal server error"
+  /feedback/{id}:
+    get:
+      summary: Retrieve a specific feedback entry
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Feedback entry found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Feedback'
+              examples:
+                success:
+                  value:
+                    feedback_id: "b1a2c3d4-e5f6-7890-abcd-1234567890ef"
+                    customer_name: "Jane Doe"
+                    customer_email: "jane@example.com"
+                    property_id: "PROP123"
+                    rating: 5
+                    category: "cleanliness"
+                    comments: "Room was spotless and staff were friendly."
+                    sentiment_score: 0.95
+                    status: "new"
+                    created_at: "2024-06-01T12:00:00Z"
+                    updated_at: "2024-06-01T12:00:00Z"
+        '404':
+          description: Feedback not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                notfound:
+                  value:
+                    code: 404
+                    message: "Feedback not found"
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                error:
+                  value:
+                    code: 500
+                    message: "Internal server error"
+    patch:
+      summary: Update or categorize feedback
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FeedbackUpdate'
+            examples:
+              update:
+                value:
+                  status: "resolved"
+                  category: "staff behavior"
+      responses:
+        '200':
+          description: Feedback updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Feedback'
+              examples:
+                success:
+                  value:
+                    feedback_id: "b1a2c3d4-e5f6-7890-abcd-1234567890ef"
+                    customer_name: "Jane Doe"
+                    customer_email: "jane@example.com"
+                    property_id: "PROP123"
+                    rating: 5
+                    category: "staff behavior"
+                    comments: "Room was spotless and staff were friendly."
+                    sentiment_score: 0.95
+                    status: "resolved"
+                    created_at: "2024-06-01T12:00:00Z"
+                    updated_at: "2024-06-03T09:00:00Z"
+        '400':
+          description: Invalid update
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                invalid:
+                  value:
+                    code: 400
+                    message: "Invalid status value"
+        '404':
+          description: Feedback not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                notfound:
+                  value:
+                    code: 404
+                    message: "Feedback not found"
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                error:
+                  value:
+                    code: 500
+                    message: "Internal server error"
+  /feedback/{id}/response:
+    post:
+      summary: Post a management response to feedback
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FeedbackResponseSubmission'
+            examples:
+              valid:
+                value:
+                  responder_name: "Manager Mike"
+                  response_message: "Thank you for your feedback! We will address your concerns."
+      responses:
+        '201':
+          description: Response posted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeedbackResponse'
+              examples:
+                success:
+                  value:
+                    response_id: "r1b2c3d4-e5f6-7890-abcd-1234567890ef"
+                    feedback_id: "b1a2c3d4-e5f6-7890-abcd-1234567890ef"
+                    responder_name: "Manager Mike"
+                    response_message: "Thank you for your feedback! We will address your concerns."
+                    created_at: "2024-06-03T10:00:00Z"
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                invalid:
+                  value:
+                    code: 400
+                    message: "Missing response message"
+        '404':
+          description: Feedback not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                notfound:
+                  value:
+                    code: 404
+                    message: "Feedback not found"
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                error:
+                  value:
+                    code: 500
+                    message: "Internal server error"
+  /analytics/summary:
+    get:
+      summary: Generate summary statistics
+      responses:
+        '200':
+          description: Summary statistics
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnalyticsSummary'
+              examples:
+                success:
+                  value:
+                    average_rating: 4.2
+                    total_feedback: 120
+                    top_issues:
+                      - "cleanliness"
+                      - "food quality"
+                      - "staff behavior"
+                    sentiment_distribution:
+                      positive: 80
+                      neutral: 25
+                      negative: 15
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                error:
+                  value:
+                    code: 500
+                    message: "Internal server error"
+components:
+  schemas:
+    Feedback:
+      type: object
+      properties:
+        feedback_id:
+          type: string
+          format: uuid
+        customer_name:
+          type: string
+        customer_email:
+          type: string
+          format: email
+        property_id:
+          type: string
+        rating:
+          type: integer
+        category:
+          type: string
+        comments:
+          type: string
+        sentiment_score:
+          type: number
+          format: float
+        status:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    FeedbackSubmission:
+      type: object
+      required:
+        - customer_name
+        - customer_email
+        - property_id
+        - rating
+        - category
+        - comments
+      properties:
+        customer_name:
+          type: string
+        customer_email:
+          type: string
+          format: email
+        property_id:
+          type: string
+        rating:
+          type: integer
+        category:
+          type: string
+        comments:
+          type: string
+    FeedbackUpdate:
+      type: object
+      properties:
+        status:
+          type: string
+        category:
+          type: string
+    FeedbackResponseSubmission:
+      type: object
+      required:
+        - responder_name
+        - response_message
+      properties:
+        responder_name:
+          type: string
+        response_message:
+          type: string
+    FeedbackResponse:
+      type: object
+      properties:
+        response_id:
+          type: string
+          format: uuid
+        feedback_id:
+          type: string
+          format: uuid
+        responder_name:
+          type: string
+        response_message:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+    AnalyticsSummary:
+      type: object
+      properties:
+        average_rating:
+          type: number
+          format: float
+        total_feedback:
+          type: integer
+        top_issues:
+          type: array
+          items:
+            type: string
+        sentiment_distribution:
+          type: object
+          properties:
+            positive:
+              type: integer
+            neutral:
+              type: integer
+            negative:
+              type: integer
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
 
