@@ -1,6 +1,6 @@
 openapi: 3.0.1
 info:
-  title: Customer Feedback API Test
+  title: Customer Feedback API
   version: 1.0.0
   description: |
     RESTful API for collecting, managing, analyzing, and responding to customer feedback. Enables businesses to improve service quality and operational decision-making.
