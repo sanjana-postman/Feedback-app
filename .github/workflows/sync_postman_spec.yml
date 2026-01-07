@@ -207,6 +207,7 @@ jobs:
             
             # Read file content and escape for JSON
             file_content=$(cat "${{ inputs.file_path }}" | jq -Rs .)
+            echo file_content
             
             # Update the spec file
             update_response=$(curl -s -w "\n%{http_code}" \
@@ -215,6 +216,7 @@ jobs:
               -H "Content-Type: application/json" \
               -H "Accept: application/vnd.api.v10+json" \
               -d "{\"content\": $file_content}")
+              
             
             update_http_code=$(echo "$update_response" | tail -n1)
             
