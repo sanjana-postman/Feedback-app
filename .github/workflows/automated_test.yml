@@ -14,7 +14,7 @@ jobs:
         run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
       - name: Lint the spec
         run: |
-          postman spec lint "76a9eec1-94dc-4610-be02-3144c7976637" --fail-severity-error
+          postman spec lint "76a9eec1-94dc-4610-be02-3144c7976637" --fail-severity error
       - name: Run API tests
         run: |
           postman collection run "47653690-00428b1d-013a-4557-a598-b3a20ed22a01" -e "47653690-fa66c36c-63fc-4149-810a-de9bad4b8977"
